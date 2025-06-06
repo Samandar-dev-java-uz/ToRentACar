@@ -84,6 +84,7 @@ public class AuthService {
 
                     if (Objects.equals(user.getStatusUser(),Status.ADMIN)){
                         System.out.println(" admin");
+                        new AdminService().service();
                         return;
                     }
                     if (Objects.equals(user.getStatusUser(),Status.USER)){
@@ -117,7 +118,7 @@ public class AuthService {
         user.setPassword(scannerStr.nextLine());
         System.out.println(" enter email");
         user.setEmail(scannerStr.nextLine());
-        user.setStatusUser(Status.USER);
+        user.setStatusUser(Status.ADMIN);
         user.setIsConfirm(false);
         String code = code();
         user.setConfirm(new Confirm(code, LocalTime.now().plusMinutes(2)));
