@@ -1,5 +1,6 @@
 package org.Icecream.work.data;
 
+import org.Icecream.work.entity.BookingCar;
 import org.Icecream.work.entity.Car;
 import org.Icecream.work.entity.User;
 
@@ -13,7 +14,8 @@ public class DataSource
     public static Scanner scannerStr = new Scanner(System.in);
     public static Scanner scannerInt = new Scanner(System.in);
     public static List<User> users =  new ArrayList<>();
-    public  static   List<Car> Cars = new ArrayList<>();
+    public  static   List<Car> cars = new ArrayList<>();
+    public  static   List<BookingCar> bookingCars = new ArrayList<>();
     public  static   Integer number(){
         Integer number = 0;
         while (true){

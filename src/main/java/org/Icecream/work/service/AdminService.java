@@ -1,5 +1,6 @@
 package org.Icecream.work.service;
 
+import org.Icecream.work.entity.BookingCar;
 import org.Icecream.work.entity.Car;
 import org.Icecream.work.entity.Status;
 
@@ -23,14 +24,20 @@ public class AdminService {
                 case 0 ->{return;}
                 case 1 -> addCar();
                 case 2 -> showCar();
-                case 3 ->{return;}
+                case 3 -> MageCar();
                 case 4 ->{return;}
             }
         }
     }
 
+    private void MageCar() {
+        for (BookingCar bookingCar : bookingCars) {
+            System.out.println(bookingCar );
+        }
+    }
+
     private void showCar() {
-        for (Car car : Cars) {
+        for (Car car : cars) {
             System.out.println(car);
         }
     }
@@ -44,6 +51,7 @@ public class AdminService {
         System.out.println(" enter one day  price ");
         car.setPrice(scannerInt.nextInt());
         car.setCarStatus(Status.ACTIVE);
-        Cars.add(car);
+        cars.add(car);
     }
+
 }
