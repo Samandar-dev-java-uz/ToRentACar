@@ -1,8 +1,8 @@
-package org.Icecream.work.data;
+package data;
 
-import org.Icecream.work.entity.BookingCar;
-import org.Icecream.work.entity.Car;
-import org.Icecream.work.entity.User;
+import entity.BookingCar;
+import entity.Car;
+import entity.User;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,10 @@
-package org.Icecream.work.service;
+package service;
 
-import org.Icecream.work.entity.BookingCar;
-import org.Icecream.work.entity.Car;
-import org.Icecream.work.entity.Status;
+import entity.Car;
+import entity.Status;
 
 import java.util.Iterator;
 import java.util.Objects;
-
-import static org.Icecream.work.data.DataSource.*;
 
 public class AdminService {
 
@@ -37,11 +34,10 @@ public class AdminService {
         showCar();
         System.out.println(" enter id  select car ");
         String carId = scannerStr.nextLine();
-        for (Car car : cars) {
-            if (Objects.equals(car.getCarId(), carId)) {
-                System.out.println(car.getCount());
-            }
-        }
+        cars.stream()
+                .forEach(car ->{
+                    System.out.println(car);
+                });
     }
 
     private void mageCar() {

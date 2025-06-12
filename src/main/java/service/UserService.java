@@ -1,4 +1,4 @@
-package org.Icecream.work.service;
+package service;
 
 public class UserService {
     public void service(){

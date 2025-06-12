@@ -1,4 +1,4 @@
-package org.Icecream.work.entity;
+package entity;
 
 public enum Status {
     ADMIN,USER,BOOKIT,ACTIVE,INACTIVE;

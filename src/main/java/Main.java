@@ -1,9 +1,4 @@
-package org.Icecream.work;
-
-import org.Icecream.work.service.AuthService;
-
-import java.util.ArrayList;
-import java.util.List;
+import service.AuthService;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.

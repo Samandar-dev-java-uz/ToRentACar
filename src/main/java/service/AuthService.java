@@ -1,12 +1,10 @@
-package org.Icecream.work.service;
-import org.Icecream.work.entity.Confirm;
-import org.Icecream.work.entity.Status;
-import org.Icecream.work.entity.User;
+package service;
+import entity.Confirm;
+import entity.Status;
+import entity.User;
 
 import java.time.LocalTime;
 import java.util.Objects;
-
-import  static org.Icecream.work.data.DataSource.*;
 
 public class AuthService {
     public void service(){
