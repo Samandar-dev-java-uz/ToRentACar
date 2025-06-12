@@ -11,9 +11,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Confirm {
-
     private  String  code;
     private LocalTime time;
-
 
 }

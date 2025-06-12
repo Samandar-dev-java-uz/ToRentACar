@@ -5,6 +5,7 @@ import entity.User;
 
 import java.time.LocalTime;
 import java.util.Objects;
+import java.util.Optional;
 
 import static data.DataSource.*;
 
@@ -76,57 +77,63 @@ public class AuthService {
         System.out.println(" enter password");
         String Password = (scannerStr.nextLine());
 
-        for (User user : users) {
+        Optional<User> SignUser = users.stream()
+                .filter(user ->Objects.equals(user.getEmail(),Email)&&Objects.equals(user.getPassword(),Password))
+                .findFirst();
 
-            if (Objects.equals(Email,user.getEmail())&&Objects.equals(user.getPassword(),Password)){
 
-                if (Objects.equals(user.getIsConfirm(),true)){
+        SignUser.ifPresentOrElse(user ->{
 
-                    if (Objects.equals(user.getStatusUser(),Status.ADMIN)){
-                        System.out.println(" admin");
-                        new AdminService().service();
-                        return;
-                    }
-                    if (Objects.equals(user.getStatusUser(),Status.USER)){
-                        System.out.println(" user ");
-                        return;
-
-                    }
+            if (Boolean.TRUE.equals(user.getIsConfirm())) {
+                if (user.getStatusUser() == Status.ADMIN) {
+                    System.out.println("✅ Admin login");
+                    new AdminService().service();
+                } else if (user.getStatusUser() == Status.USER) {
+                    System.out.println("✅ User login");
+                     new UserService().service();
                 }
-                System.out.println(" Please  can you doing confirm try again");
-                return;
+            } else {
+                System.out.println("❗ Please confirm your account first.");
             }
-        }
 
-        System.out.println(" user not fount ");
+        }, () -> {
+            System.out.println("❌ User not found or incorrect credentials.");
+
+        });
+
+
 
 
 
     }
 
     private void signUp() {
-
-        User user  = new User();
-
-        System.out.println(" enter name ");
-        user.setName(scannerStr.nextLine());
-        System.out.println(" enter surname ");
-        user.setSurname(scannerStr.nextLine());
-        System.out.println(" enter ega ");
-        user.setAge(number());
-        System.out.println(" enter password");
-        user.setPassword(scannerStr.nextLine());
-        System.out.println(" enter email");
-        user.setEmail(scannerStr.nextLine());
-        user.setStatusUser(Status.ADMIN);
-        user.setIsConfirm(false);
         String code = code();
-        user.setConfirm(new Confirm(code, LocalTime.now().plusMinutes(2)));
+        System.out.println(" enter name ");
+        String userName = scannerStr.nextLine();
+        System.out.println(" enter surname ");
+        String userSurname = scannerStr.nextLine();
+        System.out.println(" enter ega ");
+        Integer userAge =number();
+        System.out.println(" enter password");
+        String userPassword = scannerStr.nextLine();
+        System.out.println(" enter email");
+        String UserEmail = scannerStr.nextLine();
 
-        System.out.printf("your code  %s",code);
-        System.out.println();
+        User user  = User.builder()
+                .name(userName)
+                .surname(userSurname)
+                .age(userAge)
+                .email(UserEmail)
+                .password(userPassword)
+                .confirm(new Confirm(code,LocalTime.now().plusMinutes(1)))
+                .isConfirm(false)
+                .statusUser(Status.USER)
+                .build();
 
         users.add(user);
+        System.out.printf("your code  %s",code);
+        System.out.println();
 
     }
 

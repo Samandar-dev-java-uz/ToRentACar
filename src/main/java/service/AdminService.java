@@ -6,7 +6,6 @@ import entity.Status;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static data.DataSource.*;
 
@@ -38,17 +37,14 @@ public class AdminService {
         showCar();
         System.out.println(" enter id  select car ");
         String carId = scannerStr.nextLine();
-        cars.stream()
-                .forEach(car ->{
-                    System.out.println(car);
-                });
+    
     }
 
     private void mageCar() {
         while(true){
             System.out.println("""
                     0 exit
-                    1 edit car
+                    1 update car
                     2 delete car
                     """);
             switch (number()){
