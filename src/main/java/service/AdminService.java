@@ -5,6 +5,10 @@ import entity.Status;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static data.DataSource.*;
 
 public class AdminService {
 
@@ -73,6 +77,7 @@ public class AdminService {
             if (Objects.equals(car.getCarId(),carId)){
                 iterator.remove();
                 System.out.println( "  can remove ");
+                return;
             }
         }
         System.out.println(" not found car ");
@@ -83,22 +88,33 @@ public class AdminService {
         showCar();
         System.out.println(" enter id  select car ");
         String carId  = scannerStr.nextLine();
-        for (Car car : cars) {
-            if (Objects.equals(car.getCarId(),carId)){
 
-                System.out.println(" enter car name ");
-                car.setName(scannerStr.nextLine());
-                System.out.println(" enter car year");
-                car.setYear(scannerStr.nextLine());
-                System.out.println(" enter one day  price ");
-                car.setPrice(scannerInt.nextInt());
-                car.setCarStatus(Status.ACTIVE);
-                return;
+        Optional<Car> CarEdit = cars.stream()
+                .filter(car ->Objects.equals(carId,car.getCarId()))
+                .findFirst();
 
-            }
+        CarEdit.ifPresentOrElse(car ->{
 
-        }
-        System.out.println(" not fount car ");
+            System.out.println("Enter car name: ");
+            car.setBrand(scannerStr.nextLine());
+
+            System.out.println("Enter car year: ");
+            car.setYear(String.valueOf(scannerInt.nextInt()));
+            scannerStr.nextLine(); // buffer clean
+
+            System.out.println("Enter one day price: ");
+            car.setPriceDay((int) scannerInt.nextDouble());
+            scannerInt.nextLine(); // buffer clean
+
+            System.out.println("Enter car color: ");
+            car.setColor(scannerStr.nextLine());
+
+            car.setCarStatus(Status.ACTIVE);
+
+            System.out.println("✅ Car updated successfully.");
+        }, () -> {
+            System.out.println("❌ Car with ID " + carId + " not found.");
+        });
     }
 
     private void MageCar() {
@@ -106,21 +122,36 @@ public class AdminService {
     }
 
     private void showCar() {
-        for (Car car : cars) {
-            System.out.println(car);
-        }
+        cars.stream()
+                .forEach(Car -> {
+                    System.out.println(Car);
+                });
     }
 
     private void addCar() {
-        Car car = new Car();
-        System.out.println(" enter car name ");
-        car.setName(scannerStr.nextLine());
-        System.out.println(" enter car year");
-        car.setYear(scannerStr.nextLine());
-        System.out.println(" enter one day  price ");
-        car.setPrice(scannerInt.nextInt());
-        car.setCarStatus(Status.ACTIVE);
+        System.out.println("Enter car brand: ");
+        String brand = scannerStr.nextLine();
+
+        System.out.println("Enter car year: ");
+        int year = number();
+
+        System.out.println("Enter car color: ");
+        String color = scannerStr.nextLine();
+
+        System.out.println("Enter one day price: ");
+        Integer price = number();
+
+
+        Car car = Car.builder()
+                .brand(brand)
+                .year(String.valueOf(year))
+                .color(color)
+                .priceDay( price)
+                .carStatus(Status.ACTIVE)
+                .build();
+
         cars.add(car);
+
     }
 
 }

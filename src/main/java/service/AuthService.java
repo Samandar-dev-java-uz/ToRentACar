@@ -6,6 +6,8 @@ import entity.User;
 import java.time.LocalTime;
 import java.util.Objects;
 
+import static data.DataSource.*;
+
 public class AuthService {
     public void service(){
 

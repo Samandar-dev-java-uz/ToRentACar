@@ -1,7 +1,7 @@
 package data;
 
-import entity.BookingCar;
 import entity.Car;
+import entity.Rental;
 import entity.User;
 
 import java.util.ArrayList;
@@ -15,7 +15,8 @@ public class DataSource
     public static Scanner scannerInt = new Scanner(System.in);
     public static List<User> users =  new ArrayList<>();
     public  static   List<Car> cars = new ArrayList<>();
-    public  static   List<BookingCar> bookingCars = new ArrayList<>();
+    public  static   List<Rental> rentals = new ArrayList<>();
+    public static User CurrentUser = null;
     public  static   Integer number(){
         Integer number = 0;
         while (true){
